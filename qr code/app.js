@@ -7,28 +7,29 @@ const resultContainer = document.getElementById("result=box");
 const resultOutput = document.getElementById("result-text");
 
 let scanning = false;
+
 scanButton.addEventListener("click", function () {
-    if (scanning) return;
-    startScanner();
+  if (scanning) return;
+  startScanner();
 });
 
 function startScanner() {
-    navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment"} } )
-        .then(function (stream) {
-            cameraFeed.srcObject = stream;
-            cameraFeed.setAttribute("playsinline", true);
-            cameraFeed.play();
-            scanning = true;
-            scanButton.disabled = true;
-            scanButton.textContent = "Scanning...";
-            statusMsg.textContent = "Point the camera at a QR code.";
-            requestAnimationFrame(tick);
-        })
-        .catch(function (err) {
-            statusMsg.textContent = "Camera access denied. Please allow camera permission.";
-            console.error(err);
-        });           
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: "environment" } })
+    .then(function (stream) {
+      cameraFeed.srcObject = stream;
+      cameraFeed.setAttribute("playsinline", true);
+      cameraFeed.play();
+      scanning = true;
+      scanButton.disabled = true;
+      scanButton.textContent = "Scanning...";
+      statusMsg.textContent = "Point the camera at a QR code.";
+      requestAnimationFrame(tick);
+    })
+    .catch(function (err) {
+      statusMsg.textContent = "Camera access denied. Please allow camera permission.";
+      console.error(err);
+    });
 }
 
 function tick() {
