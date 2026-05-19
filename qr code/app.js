@@ -18,7 +18,7 @@ function startScanner() {
         .then(function (stream) {
             cameraFeed.srcObject = stream;
             cameraFeed.setAttribute("playsinline", true);
-            cameraFeed.onplay();
+            cameraFeed.play();
             scanning = true;
             scanButton.disabled = true;
             scanButton.textContent = "Scanning...";
